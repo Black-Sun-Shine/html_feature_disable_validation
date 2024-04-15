@@ -1,0 +1,33 @@
+DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>this is a html test</title>
+    </head>
+    <body>
+        <h1>my html test</h1>
+        <div id="info"></div>
+        <script>
+            const supported = (() => {
+                try {
+                    window.reco = new webkitSpeechRecognition();
+                    return true;
+                }catch(e) {
+                    console.log(e.name);
+                    console.log(e.message);
+                    console.log(e.stack);
+                    return;
+                }
+            })();
+            // console.log(supported ? "The Web Speech API is supported by this browser.":"The Web Speech API is not supported by this browser.");
+            // 创建一个新的p元素
+            var p = document.createElement("p");
+            // 设置p元素的内容
+            p.textContent = supported ? "The Web Speech API is supported by this browser.":"The Web Speech API is not supported by this browser.";
+            // 获取要插入信息的容器
+            var container = document.getElementById("info");
+            // 将p元素插入到容器中
+            container.appendChild(p);
+        </script>
+    </body>
+</html>
