@@ -5,25 +5,25 @@
         <title>this is a html test</title>
     </head>
     <body>
-        <h1>html feature disable test</h1>
+        <h1>WASM test</h1>
         <div id="info"></div>
         <script>
             const supported = (() => {
                 try {
-                    window.reco = new webkitSpeechRecognition();
-                    return true;
-                }catch(e) {
-                    console.log(e.name);
-                    console.log(e.message);
-                    console.log(e.stack);
-                    return;
+                    if (typeof WebAssembly === "object"
+                        && typeof WebAssembly.instantiate === "function") {
+                            const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+                            if (module instanceof WebAssembly.Module)
+                                return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+                    }
+                } catch (e) {
                 }
+                return false;
             })();
-            // console.log(supported ? "The Web Speech API is supported by this browser.":"The Web Speech API is not supported by this browser.");
             // 创建一个新的p元素
             var p = document.createElement("p");
             // 设置p元素的内容
-            p.textContent = supported ? "The Web Speech API is supported by this browser.":"The Web Speech API is not supported by this browser.";
+            p.textContent = supported ? "WebAssembly is supported by this browser.":"WebAssembly is not supported by this browser.";
             // 获取要插入信息的容器
             var container = document.getElementById("info");
             // 将p元素插入到容器中
