@@ -5,8 +5,8 @@
         <title>this is a html test</title>
     </head>
     <body>
-        <h1>WASM test</h1>
-        <div id="info"></div>
+        <h1>WASM TEST</h1>
+        <div id="info_wasm"></div>
         <script>
             const supported = (() => {
                 try {
@@ -20,14 +20,66 @@
                 }
                 return false;
             })();
-            // 创建一个新的p元素
-            var p = document.createElement("p");
-            // 设置p元素的内容
-            p.textContent = supported ? "WebAssembly is supported by this browser.":"WebAssembly is not supported by this browser.";
-            // 获取要插入信息的容器
-            var container = document.getElementById("info");
-            // 将p元素插入到容器中
-            container.appendChild(p);
+            var p1 = document.createElement("p1");
+            p1.textContent = supported ? "WebAssembly is supported by this browser." : "WebAssembly is not supported by this browser.";
+            var container1 = document.getElementById("info_wasm");
+            container1.appendChild(p1);
+        </script>
+        <br>
+        <h1>WebGL TEST</h1>
+        <div id="info_webgl1"></div>
+        <div id="info_webgl2"></div>
+        <script>
+            function isWebGLSupported() {
+                try {
+                    var canvas = document.createElement('canvas');
+                    return !!(
+                        window.WebGLRenderingContext &&
+                        (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+                    );
+                } catch (e) {
+                    return false;
+                }
+            }
+            function isWebGL2Supported() {
+                try {
+                    var canvas = document.createElement('canvas');
+                    return !!(
+                        window.WebGL2RenderingContext &&
+                        (canvas.getContext('webgl2') || canvas.getContext('experimental-webgl2'))
+                    );
+                } catch (e) {
+                    return false;
+                }
+            }
+            var p2 = document.createElement("p2");
+            p2.textContent = isWebGLSupported ? "WebGL is supported by this browser." : "WebGL is not supported by this browser.";
+            var container2 = document.getElementById("info_webgl1");
+            container2.appendChild(p2);
+            var p3 = document.createElement("p3");
+            p3.textContent = isWebGL2Supported ? "WebGL2 is supported by this browser." : "WebGL2 is not supported by this browser.";
+            var container3 = document.getElementById("info_webgl2");
+            container3.appendChild(p3);
+        </script>
+        <br>
+        <h1>SpeechAPI TEST</h1>
+        <div id="info_Speech"></div>
+        <script>
+            const supported_speech = (() => {
+                try {
+                    window.reco = new webkitSpeechRecognition();
+                    return true;
+                } catch (e) {
+                    console.log(e.name);
+                    console.log(e.message);
+                    console.log(e.stack);
+                    return;
+                }
+            }) ();
+            var p4 = document.createElement("p4");
+            p4.textContent = supported_speech ? "The Web SpeechRecognition is supported by this browser." : "The Web SpeechRecognition is not supported by this browser.";
+            var container4 = document.getElementById("info_Speech");
+            container4.appendChild(p4);
         </script>
     </body>
 </html>
