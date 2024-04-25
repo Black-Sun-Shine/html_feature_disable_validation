@@ -81,5 +81,40 @@
             var container4 = document.getElementById("info_Speech");
             container4.appendChild(p4);
         </script>
+        <br>
+        <h1>RTCDataChannel TEST</h1>
+        <div id="info_DataChannel"></div>
+        <script>
+            const supported_data = (() => {
+                try {
+                    localConnection = new RTCPeerConnection();
+                    sendChannel = localConnection.createDataChannel("sendChannel");
+                    return true;
+                } catch (e) {
+                    return;
+                }
+            }) ();
+            var p6 = document.createElement("p6");
+            p6.textContent = supported_data ? "The RTCDataChannel is supported by this browser." : "The RTCDataChannel is not supported by this browser.";
+            var container6 = document.getElementById("info_DataChannel");
+            container6.appendChild(p6);
+        </script>
+        <br>
+        <h1>MediaDevices::getUserMedia TEST</h1>
+        <div id="info_getUserMedia"></div>
+        <script>
+            const supported_getUserMedia = (() => {
+                try {
+                    navigator.mediaDevices.getUserMedia({auiod: true});
+                    return true;
+                } catch (e) {
+                    return;
+                }
+            }) ();
+            var p7 = document.createElement("p7");
+            p7.textContent = supported_getUserMedia ? "The getUserMedia is supported by this browser." : "The getUserMedia is not supported by this browser.";
+            var container7 = document.getElementById("info_getUserMedia");
+            container7.appendChild(p7);
+        </script>
     </body>
 </html>
